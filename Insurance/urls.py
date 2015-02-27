@@ -10,8 +10,9 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'Insurance.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^$',views.index),
+    url(r'^index/$',views.index),
     url(r'^(?P<applyNum>\d*)$',views.detail),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^search/$', views.index),
+    url(r'^update/$', views.update),
+    url(r'^add/$', views.add),
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
