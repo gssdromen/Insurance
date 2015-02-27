@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>保险理赔记录系统</title>
+        <style type="text/css">
+
+        </style>
+    </head>
+
+    <body>
+        <div>
+        <form id="searchform" method="post" action="search/">
+            <label for="start">开始日：</label>
+            <input type="text" class="laydate-icon" id="start" style="width:200px; margin-right:10px;">
+            <label for="end">结束日：</label>
+            <input type="text" class="laydate-icon" id="end" style="width:200px;">
+            <input type="button" value="查询" onclick="checkIt()">
+        </form>
+        </div>
+
+        <script type="text/javascript" src="/static/js/laydate/laydate.dev.js"></script>
+        <script type="text/javascript">
+            var start = {
+                elem: '#start',
+                format: 'YYYY/MM/DD',
+                // min: laydate.now(), //设定最小日期为当前日期
+                max: '2099-06-16 23:59:59', //最大日期
+                istime: false,
+                istoday: false,
+                choose: function(datas){
+                     end.min = datas; //开始日选好后，重置结束日的最小日期
+                     end.start = datas //将结束日的初始值设定为开始日
+                }
+            };
+            var end = {
+                elem: '#end',
+                format: 'YYYY/MM/DD',
+                min: laydate.now(),
+                max: '2099-06-16 23:59:59',
+                istime: false,
+                istoday: false,
+                choose: function(datas){
+                    start.max = datas; //结束日选好后，重置开始日的最大日期
+                }
+            };
+            laydate(start);
+            laydate(end);
+
+            function checkIt(){
+                var startDate = document.getElementById('start').value;
+                var endDate = document.getElementById('end').value;
+                var thisform = document.getElementById('searchform');
+                thisform.submit();
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+</head>
+<body>
+<div>
+    {{ insurance.apply_num }}
+    <label for="">申请编号：</label>
+    <!-- <input type="text" value="asdfasdf"> -->
+    <input type="text" value="{{ insurance.apply_num }}">
+    <label for="">姓名：</label>
+    <input type="text" value="{{ insurance.name }}">
+    <label for="">经销商名：</label>
+    <input type="text" value="{{ insurance.dealer_name }}">
+</div>
+<br/>
+<br/>
+<div>
+    <label for="">还款状态：</label>
+    <input type="text" value="{{ insurance.payback_status }}">
+    <label for="">来源渠道：</label>
+    <input type="text" value="{{ insurance.from_where }}">
+</div>
+<br/>
+<br/>
+<div>
+    <label for="">是否逾期：</label>
+    <input type="checkbox" checked="{{insurance.is_overdue}}">
+    <label for="">是否完成：</label>
+    <input type="checkbox" checked="{{insurance.is_done}}">
+    <label for="">是否结清：</label>
+    <input type="checkbox" checked="{{insurance.is_clean}}">
+</div>
+<div>
+    <label for="">申请日期：</label>
+    <input type="text" disabled="true" value="{{ insurance.apply_date }}">
+</div>
+<br/>
+<br/>
+<div>
+    <label for="">最新状态：</label>
+    <textarea rows="20" cols="40" value="{{ insurance.last_status }}"></textarea>
+    <label for="">是否跟踪：</label>
+    <input type="checkbox" checked="{{insurance.watching_flag}}">
+</div>
+</body>
+</html>
