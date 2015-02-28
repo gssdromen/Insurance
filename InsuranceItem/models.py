@@ -11,7 +11,7 @@ class InsuranceItem(models.Model):
     is_done = models.BooleanField(default=False)
     is_clean = models.BooleanField(default=False)
     apply_date = models.DateField(auto_now=False, auto_now_add=True)
-    update_date = models.DateField(auto_now=False, auto_now_add=True)
+    update_date = models.DateField(auto_now=True, auto_now_add=True)
     last_status = models.TextField()
     watching_flag = models.BooleanField(default=True)
 

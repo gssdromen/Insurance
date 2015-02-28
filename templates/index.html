@@ -10,12 +10,13 @@
 
     <body>
         <div>
-        <form id="searchform" method="get" action="aa">
+        <form id="searchform" method="get" action="/search/">
             <label for="start">开始日：</label>
-            <input type="text" class="laydate-icon" id="start" style="width:200px; margin-right:10px;">
+            <input type="text" class="laydate-icon" id="start" name="start_date" style="width:200px; margin-right:10px;">
             <label for="end">结束日：</label>
-            <input type="text" class="laydate-icon" id="end" style="width:200px;">
+            <input type="text" class="laydate-icon" id="end" name="end_date" style="width:200px;">
             <input type="button" value="查询" onclick="checkIt()">
+            <input type="button" value="新增" onclick="addNew()">
             <!-- <input type="submit" value="查询"> -->
         </form>
         </div>
@@ -25,7 +26,7 @@
             {%if insurances %}
             <ul>
                 {% for insurance in insurances %}
-                    <li><a href="{{ insurance.apply_num }}">{{ insurance }}</a></li>
+                    <li><a href="/{{ insurance.apply_num }}">{{ insurance }}</a></li>
                 {% endfor %}
             </ul>
             {% endif %}
@@ -60,15 +61,14 @@
             laydate(end);
 
             function checkIt(){
-
                 var startDate = document.getElementById('start').value;
                 var endDate = document.getElementById('end').value;
-                console.log(startDate);
-                console.log(endDate);
-                alert(startDate);
                 var thisform = document.getElementById('searchform');
-                console.log(thisform);
                 thisform.submit();
+            }
+
+            function addNew () {
+                window.location.href="/newone/?is_new=True";
             }
         </script>
     </body>

@@ -4,43 +4,44 @@
 
 </head>
 <body>
-<form id="thisform" method="post" action="update">
+<form id="thisform" method="post" action="/update/">
 <div>
     <label for="">申请编号：</label>
-    <input type="text" id="apply_num" value="{{ insurance.apply_num }}">
+    <input type="text" id="apply_num" name="apply_num" value="{{ insurance.apply_num }}">
     <label for="">姓名：</label>
-    <input type="text" id="name" value="{{ insurance.name }}">
+    <input type="text" id="name" name="name" value="{{ insurance.name }}">
     <label for="">经销商名：</label>
-    <input type="text" id="dealer_name" value="{{ insurance.dealer_name }}">
+    <input type="text" id="dealer_name" name="dealer_name" value="{{ insurance.dealer_name }}">
 </div>
 <br/>
 <br/>
 <div>
     <label for="">还款状态：</label>
-    <input type="text" id="payback_status" value="{{ insurance.payback_status }}">
+    <input type="text" id="payback_status" name="payback_status" value="{{ insurance.payback_status }}">
     <label for="">来源渠道：</label>
-    <input type="text" id="from_where" value="{{ insurance.from_where }}">
+    <input type="text" id="from_where" name="from_where" value="{{ insurance.from_where }}">
 </div>
 <br/>
 <br/>
 <div>
+    <input id="update_date" name="update_date" type="hidden" value="">
     <label for="">是否逾期：</label>
     {% if insurance.is_overdue %}
-        <input type="checkbox" id="is_overdue" checked>
+        <input type="checkbox" id="is_overdue" name="is_overdue" checked>
     {% else %}
-        <input type="checkbox" id="is_overdue">
+        <input type="checkbox" id="is_overdue" name="is_overdue">
     {% endif %}
     <label for="">是否完成：</label>
     {% if insurance.is_done %}
-        <input type="checkbox" id="is_done" checked>
+        <input type="checkbox" id="is_done" name="is_done" checked>
     {% else %}
-        <input type="checkbox" id="is_done">
+        <input type="checkbox" id="is_done" name="is_done">
     {% endif %}
     <label for="">是否结清：</label>
     {% if insurance.is_clean %}
-        <input type="checkbox" id="is_clean" checked>
+        <input type="checkbox" id="is_clean" name="is_clean" checked>
     {% else %}
-        <input type="checkbox" id="is_clean">
+        <input type="checkbox" id="is_clean" name="is_clean">
     {% endif %}
 </div>
 <div>
@@ -51,24 +52,30 @@
 <br/>
 <div>
     <label for="">最新状态：</label>
-    <textarea id="last_status" rows="20" cols="40" value="{{ insurance.last_status }}"></textarea>
+    <textarea id="last_status" name="last_status" rows="20" cols="40">{{ insurance.last_status }}</textarea>
     <label for="">是否跟踪：</label>
     {% if insurance.is_clean %}
-        <input type="checkbox" id="watching_flag" checked>
+        <input type="checkbox" id="watching_flag" name="watching_flag" checked>
     {% else %}
-        <input type="checkbox" id="watching_flag">
+        <input type="checkbox" id="watching_flag" name="watching_flag">
     {% endif %}
 </div>
 <br/>
 <br/>
 <div>
-    <input type="button" value="修改" onclick="checkIt ()">
+    <!-- <input type="submit" value="修改"> -->
+    {% if is_new %}
+    <input id="btn" type="button" value="新增" onclick="checkIt ()">
+    {% else %}
+    <input id="btn" type="button" value="修改" onclick="checkIt ()">
+    {% endif %}
 </div>
 
 <script type="text/javascript" src="/static/js/laydate/laydate.dev.js"></script>
 
 <script type="text/javascript">
 function checkIt () {
+
     var apply_num = document.getElementById('apply_num').value;
     var name = document.getElementById('name').value;
     var dealer_name = document.getElementById('dealer_name').value;
@@ -81,13 +88,26 @@ function checkIt () {
 
     var last_status = document.getElementById('last_status').value;
     var watching_flag = document.getElementById('watching_flag').checked;
-    var update_date = laydate.now();
+    document.getElementById('update_date').value = laydate.now();
 
-    if (apply_num=='' || name=='' || dealer_name=='' || payback_status=='' || from_where=='' || is_overdue=='' || is_done=='' || is_clean=='' || last_status=='' || watching_flag=='' || update_date=='') {return;};
-
+    // console.log(apply_num);
+    // console.log(name);
+    // console.log(dealer_name);
+    // console.log(payback_status);
+    // console.log(from_where);
+    // console.log(is_overdue);
+    // console.log(is_done);
+    // console.log(is_clean);
+    // console.log(last_status);
+    // console.log(watching_flag);
+    // console.log(update_date);
+    if (apply_num=='' || name=='' || dealer_name=='' || payback_status=='' || from_where=='' || last_status=='' || update_date=='') {
+        alert("请填全信息");
+        return;
+    };
     var thisform = document.getElementById('thisform');
     {% if is_new %}
-        thisform.action='add'
+        thisform.action='/add/'
     {% endif %}
     thisform.submit();
 }
